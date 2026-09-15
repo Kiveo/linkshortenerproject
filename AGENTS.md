@@ -22,6 +22,13 @@ Use the focused guides below for project-specific decisions:
 - [Frontend](docs/frontend.md): Tailwind, shadcn/ui, accessibility, and visual conventions.
 - [Development workflow](docs/development-workflow.md): edits, validation, and scope discipline.
 
+## UI component rule
+
+- All UI elements in this app must use shadcn/ui.
+- Do not create custom components, custom wrappers, or any bespoke UI implementation.
+- Always use shadcn/ui components from `components/ui` for all interface elements.
+- No custom UI components or custom UI code are allowed in this app.
+
 ## Required documentation lookup
 
 Before generating, proposing, or editing any code, identify the relevant topic and read its corresponding guide in `docs/`. Treat those guides as the source of truth for project-specific conventions. For work that spans multiple topics, read every applicable guide before writing code. When no guide clearly matches, read [Project overview](docs/project-overview.md) and [Development workflow](docs/development-workflow.md) first, then add or update a focused guide if the new convention should persist.
