@@ -1,6 +1,5 @@
 ---
-name: Create Instructions
-description: Describe when to use this prompt
+description: When generating instruction md files, while leveraging the custom intructions generator agent
 agent: Instructions Generator
 ---
 
