@@ -1,7 +1,18 @@
 import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
+export default async function Home() {
+  const { userId } = await auth();
+
+  if (userId) {
+    redirect("/dashboard");
+  }
+
   return (
     <div className="relative flex min-h-full flex-1 flex-col overflow-hidden bg-[#f5f7f2] text-[#16251d]">
       <div className="pointer-events-none absolute -right-32 -top-32 size-96 rounded-full bg-[#c8e6d0] opacity-70 blur-3xl" />
@@ -11,11 +22,15 @@ export default function Home() {
         </Link>
         <nav className="flex items-center gap-3 text-sm font-medium">
           <Show when="signed-out">
-            <SignInButton mode="modal">
-              <button className="px-3 py-2 text-[#426050] transition-colors hover:text-[#16845b]">Sign in</button>
+            <SignInButton mode="modal" forceRedirectUrl="/dashboard">
+              <Button variant="ghost" size="sm" className="h-auto px-3 py-2 text-[#426050] hover:text-[#16845b]">
+                Sign in
+              </Button>
             </SignInButton>
-            <SignUpButton mode="modal">
-              <button className="rounded-full bg-[#16845b] px-4 py-2.5 text-white shadow-sm transition-colors hover:bg-[#0f6b48]">Create account</button>
+            <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
+              <Button size="sm" className="rounded-full bg-[#16845b] px-4 py-2.5 text-white shadow-sm hover:bg-[#0f6b48]">
+                Create account
+              </Button>
             </SignUpButton>
           </Show>
           <Show when="signed-in">
@@ -36,13 +51,15 @@ export default function Home() {
         </div>
 
         <div className="mt-14 flex max-w-2xl flex-col gap-3 rounded-2xl border border-[#d9e6dc] bg-white/80 p-3 shadow-[0_20px_60px_-35px_rgba(22,37,29,0.45)] backdrop-blur sm:flex-row">
-          <input
+          <Input
             type="url"
             placeholder="Paste a long URL to get started"
-            className="min-w-0 flex-1 rounded-xl bg-transparent px-4 py-3 text-base outline-none placeholder:text-[#91a69a]"
             aria-label="Long URL"
+            className="min-w-0 flex-1 rounded-xl border-0 bg-transparent px-4 py-3 text-base shadow-none placeholder:text-[#91a69a] focus-visible:ring-0"
           />
-          <button className="rounded-xl bg-[#16251d] px-6 py-3 font-medium text-white transition-colors hover:bg-[#274432]">Shorten link</button>
+          <Button className="rounded-xl bg-[#16251d] px-6 py-3 font-medium text-white hover:bg-[#274432]">
+            Shorten link
+          </Button>
         </div>
 
         <p className="mt-5 text-sm text-[#789083]">Free to try. No credit card required.</p>
