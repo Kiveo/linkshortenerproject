@@ -1,4 +1,4 @@
-For detailed guidelines on specific topics, refer to the modular documentation in the `/docs` directory. ALWAYS refer to the relevant .md file BEFORE generating any code.
+For detailed guidelines on specific topics, refer to the modular documentation in the `/docs` directory. This is extremely important: ALWAYS read the relevant individual instruction file(s) in `/docs` before generating, proposing, or editing any code.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
@@ -31,12 +31,15 @@ Use the focused guides below for project-specific decisions:
 
 ## Required documentation lookup
 
-Before generating, proposing, or editing any code, identify the relevant topic and read its corresponding guide in `docs/`. Treat those guides as the source of truth for project-specific conventions. For work that spans multiple topics, read every applicable guide before writing code. When no guide clearly matches, read [Project overview](docs/project-overview.md) and [Development workflow](docs/development-workflow.md) first, then add or update a focused guide if the new convention should persist.
+This is mandatory and non-negotiable: before generating, proposing, or editing any code, identify the relevant topic and read the specific instruction file(s) in `docs/` that apply to that task. Treat those individual guides as the source of truth for project-specific conventions. For work that spans multiple topics, read every applicable guide before writing code. When no guide clearly matches, read [Project overview](docs/project-overview.md) and [Development workflow](docs/development-workflow.md) first, then add or update a focused guide if the new convention should persist.
+
+Do not skip this step. Do not infer conventions without checking the relevant docs first. The docs in `/docs` must be read before any code is generated.
 
 ## Rules at a glance
 
 - Read the relevant local Next.js guide before changing framework-sensitive code. The installed documentation lives under `node_modules/next/dist/docs/`.
-- Always read the relevant `docs/*.md` guide before generating any code, including small snippets, fixes, tests, configuration, and refactors.
+- Always read the relevant individual `docs/*.md` guide before generating any code, including small snippets, fixes, tests, configuration, and refactors.
+- This requirement is critical: the relevant docs must be reviewed before any code generation begins.
 - Preserve existing public APIs and local patterns. Keep changes focused on the requested behavior.
 - Never expose secrets or server-only environment variables to client components.
 - Prefer existing dependencies and components over introducing new abstractions or packages.
