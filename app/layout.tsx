@@ -26,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ClerkProvider appearance={{ theme: dark }}>
+        <ClerkProvider appearance={{ theme: dark }} telemetry={{ disabled: true }}>
           {children}
         </ClerkProvider>
       </body>
