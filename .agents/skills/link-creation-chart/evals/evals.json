@@ -1,0 +1,39 @@
+{
+  "skill_name": "link-creation-chart",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use this project's database to show how many short links were created in each of the past 12 calendar months. Produce a PNG bar chart with one month per bar and tell me where you saved it.",
+      "expected_output": "A valid non-empty PNG bar chart generated from a read-only query using DATABASE_URL from .env, with 12 chronological month labels, link counts on the y-axis, and the output path reported without revealing credentials.",
+      "files": [],
+      "expectations": [
+        "A Python script loads DATABASE_URL from .env without printing its value.",
+        "The database query is read-only and aggregates links.created_at by month over exactly 12 calendar months.",
+        "The generated PNG contains 12 chronological month categories and includes zero-count months.",
+        "The final response reports the PNG path and does not expose the connection string."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Make a monthly link-growth chart for the last year from the Postgres data. Some months may have no links, but I still need every month shown on the x axis. Export the result as a PNG.",
+      "expected_output": "A PNG chart with all 12 months represented, including zero-height bars where no links were created, using the project's database configuration and a clearly labeled y-axis.",
+      "files": [],
+      "expectations": [
+        "The workflow explicitly fills missing monthly query results with zero.",
+        "The x-axis has exactly 12 chronological labels and the output is PNG format.",
+        "The chart has a descriptive title and labels for both axes."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Please generate the 12-month links-created PNG report, but first handle any missing Python plotting/database packages or missing DATABASE_URL cleanly. Do not invent data if the database cannot be reached.",
+      "expected_output": "A safe workflow that installs or explains the required Python dependencies, checks DATABASE_URL, and stops with a concise non-secret error instead of producing fabricated data when access fails.",
+      "files": [],
+      "expectations": [
+        "The skill identifies python-dotenv, psycopg, and matplotlib as dependencies.",
+        "The workflow checks for DATABASE_URL before querying and never fabricates counts.",
+        "Database failures are reported without exposing credentials or the full connection string."
+      ]
+    }
+  ]
+}
