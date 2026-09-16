@@ -1,3 +1,7 @@
+---
+description: Read this before creating or modifying UI components in the project.
+---
+
 # Frontend standards
 
 - All UI elements in this app must use shadcn/ui components from `components/ui`.
