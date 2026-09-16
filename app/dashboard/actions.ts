@@ -7,7 +7,18 @@ import { z } from "zod";
 import { createUserLink } from "@/data/links";
 
 const createLinkSchema = z.object({
-	originalUrl: z.url("Enter a valid URL.").max(2048),
+	originalUrl: z
+		.string()
+		.trim()
+		.max(2048)
+		.refine((value) => {
+			try {
+				const url = new URL(value);
+				return (url.protocol === "http:" || url.protocol === "https:") && Boolean(url.hostname);
+			} catch {
+				return false;
+			}
+		}, "Enter a valid http(s) URL."),
 });
 
 export async function createLink(originalUrl: string) {
@@ -20,7 +31,7 @@ export async function createLink(originalUrl: string) {
 	const result = createLinkSchema.safeParse({ originalUrl });
 
 	if (!result.success) {
-		return { error: result.error.issues[0]?.message ?? "Enter a valid URL." };
+		return { error: result.error.issues[0]?.message ?? "Enter a valid http(s) URL." };
 	}
 
 	await createUserLink({
