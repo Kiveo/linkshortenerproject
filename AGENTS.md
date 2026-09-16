@@ -16,11 +16,9 @@ Shortly is a Next.js App Router link shortener using React, Clerk, Neon Postgres
 
 Use the focused guides below for project-specific decisions:
 
-- [Project overview](docs/project-overview.md): repository shape, ownership boundaries, and current implementation status.
 - [Next.js and React](docs/nextjs-and-react.md): App Router, server/client boundaries, and framework checks.
 - [Authentication and data](docs/auth-and-data.md): Clerk-only authentication, protected routes, modal sign-in/sign-up, Neon, Drizzle, and environment variables.
 - [Frontend](docs/frontend.md): Tailwind, shadcn/ui, accessibility, and visual conventions.
-- [Development workflow](docs/development-workflow.md): edits, validation, and scope discipline.
 
 ## UI component rule
 
