@@ -3,7 +3,6 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 export default async function Home() {
   const { userId } = await auth();
@@ -30,23 +29,17 @@ export default async function Home() {
       </header>
 
       <div className="mx-auto flex min-h-[calc(100vh-89px)] w-full max-w-4xl items-center justify-center px-6 py-12">
-        <div className="w-full max-w-2xl">
-          <h1 className="text-center text-3xl font-semibold tracking-tight">
-            Shorten a link
+        <div className="w-full max-w-2xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+            Shortly
+          </p>
+          <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+            Share links that are short, simple, and easy to remember.
           </h1>
-          <form className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Input
-              type="url"
-              name="url"
-              placeholder="Paste a long URL"
-              aria-label="Long URL"
-              required
-              className="h-11 flex-1 bg-background text-base"
-            />
-            <Button type="submit" size="lg" className="h-11 px-6 text-base">
-              Shorten link
-            </Button>
-          </form>
+          <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">
+            Turn long URLs into clean short links and manage them from one
+            focused dashboard.
+          </p>
         </div>
       </div>
     </main>
