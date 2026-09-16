@@ -3,8 +3,10 @@ import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
 import { getUserLinks } from "@/data/links";
+
+import { CreateLinkDialog } from "./create-link-dialog";
+import { LinkActions } from "./link-actions";
 
 export default async function DashboardPage() {
   const { userId } = await auth();
@@ -42,9 +44,7 @@ export default async function DashboardPage() {
             </h1>
           </div>
 
-          <Button type="button" size="default" className="w-fit">
-            Create link
-          </Button>
+      <CreateLinkDialog />
         </div>
 
         <div className="space-y-4">
@@ -57,40 +57,19 @@ export default async function DashboardPage() {
             </div>
           ) : (
             links.map((link) => {
-              const shortUrl = `${shortBaseUrl}/${link.shortCode}`;
+              const shortUrl = `${shortBaseUrl}/l/${link.shortCode}`;
+              const shortPath = `/l/${link.shortCode}`;
 
               return (
                 <article
                   key={link.id}
                   className="rounded-3xl border border-border bg-card p-5 shadow-sm transition-colors hover:bg-accent/30"
                 >
-                  <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                    <div className="min-w-0 flex-1">
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                        Short link
-                      </p>
-                      <a
-                        href={shortUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-2 block truncate text-lg font-medium text-foreground underline-offset-4 hover:underline"
-                      >
-                        {shortUrl}
-                      </a>
-                      <p className="mt-2 truncate text-sm text-muted-foreground">
-                        {link.originalUrl}
-                      </p>
-                    </div>
-
-                    <div className="flex shrink-0 items-center gap-2">
-                      <Button type="button" variant="outline" size="sm">
-                        Copy
-                      </Button>
-                      <Button type="button" variant="outline" size="sm">
-                        Open
-                      </Button>
-                    </div>
-                  </div>
+                  <LinkActions
+                    shortUrl={shortUrl}
+                    shortPath={shortPath}
+                    originalUrl={link.originalUrl}
+                  />
                 </article>
               );
             })

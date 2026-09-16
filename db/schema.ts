@@ -8,6 +8,7 @@ export const links = pgTable(
 		originalUrl: text("original_url").notNull(),
 		shortCode: varchar("short_code", { length: 16 }).notNull().unique(),
 		createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+		updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 	},
 	(table) => [index("links_user_id_idx").on(table.userId)],
 );
